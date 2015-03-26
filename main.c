@@ -1,34 +1,32 @@
 /**
-This function was made by Jurica Resetar
-Purpose: task for student internship at ARM
+Made by Jurica Resetar
+jurica_resetar@yahoo.com
 **/
+
 #include <stdio.h>
 #include <stdlib.h>
+
 int count_ones (char * pointer_to_memory, int size_of_stream_in_bits);
 
-int main()
-{
-    char * start;
-    char test [2]= "AI";
-    printf ("%d\n", count_ones(test, 11));
+int main(){
+    char test1 = 'A';
+    char test2 [] ="Hello";
+    printf ("First test: %d\n", count_ones(&test1, 8));
+    printf ("Second test: %d\n", count_ones(&test1, 2));
+    printf ("Third test: %d\n", count_ones(test2, 15));
+    return 0;
 }
 
 int count_ones (char * pointer_to_memory, int size_of_stream_in_bits){
-    /**
-    *Idea: see how many bytes you have to read
-    *Make one loop and within read byte per byte
-    *In last byte you have to be careful- do not
-    *read to many bits
-    *Count ones with mask (0x01) and in every loop pass
-    *shift it for 1 in left
-    **/
+
+    if (!size_of_stream_in_bits) return 0;
+
     int i, j;
     int number_of_ones=0;
-    int number_of_bytes=size_of_stream_in_bits/8;   //Rest of bits (if numberOfBytsNot n*8)
-    char tempData= *pointer_to_memory;
-    int  rest_of_bits=size_of_stream_in_bits%8;
+    char tempData;
+    short  rest_of_bits=size_of_stream_in_bits%8;
 
-    for (i=0; i<number_of_bytes; i++){
+     for (i=0; i<size_of_stream_in_bits/8; i++){
         tempData= *pointer_to_memory;
         pointer_to_memory++;
         for (j=0; j<8; j++){
